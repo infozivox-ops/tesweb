@@ -1,0 +1,123 @@
+import type { FamilyWalletState } from "@/types/domain";
+
+export const demoSeed: FamilyWalletState = {
+  families: [
+    {
+      id: "family_demo",
+      name: "Yıldız Ailesi",
+      currency: "TRY",
+      joinCode: "FAM-DEMO01",
+      createdAt: Date.now() - 1000 * 60 * 60 * 24,
+      description: "Demo aile hesabı",
+    },
+  ],
+  members: [
+    {
+      id: "member_parent",
+      familyId: "family_demo",
+      displayName: "Ayşe Yıldız",
+      role: "parent",
+      iban: "TR120006200000123456789012",
+      avatar: "👩‍👧",
+      createdAt: Date.now() - 1000 * 60 * 60 * 22,
+      isActive: true,
+    },
+    {
+      id: "member_child",
+      familyId: "family_demo",
+      displayName: "Efe Yıldız",
+      role: "child",
+      iban: null,
+      avatar: "🧒",
+      createdAt: Date.now() - 1000 * 60 * 60 * 21,
+      isActive: true,
+    },
+    {
+      id: "member_member",
+      familyId: "family_demo",
+      displayName: "Duru Yıldız",
+      role: "member",
+      iban: "TR560006200000987654321098",
+      avatar: "👩‍🦰",
+      createdAt: Date.now() - 1000 * 60 * 60 * 20,
+      isActive: true,
+    },
+  ],
+  allowancePlans: [
+    {
+      id: "allowance_demo",
+      familyId: "family_demo",
+      memberId: "member_child",
+      amount: 250,
+      frequency: "monthly",
+      startDate: Date.now() - 1000 * 60 * 60 * 24,
+      note: "Okul başarı ödülü",
+      isPaused: false,
+    },
+  ],
+  expenses: [
+    {
+      id: "expense_demo_1",
+      familyId: "family_demo",
+      title: "Market alışverişi",
+      amount: 800,
+      paidByMemberId: "member_parent",
+      splitMethod: "equal",
+      participants: [
+        { memberId: "member_parent", shareAmount: 266.67 },
+        { memberId: "member_child", shareAmount: 266.67 },
+        { memberId: "member_member", shareAmount: 266.66 },
+      ],
+      date: Date.now() - 1000 * 60 * 60 * 12,
+      note: "Haftalık market",
+    },
+    {
+      id: "expense_demo_2",
+      familyId: "family_demo",
+      title: "Sinemaya bilet",
+      amount: 450,
+      paidByMemberId: "member_member",
+      splitMethod: "equal",
+      participants: [
+        { memberId: "member_parent", shareAmount: 150 },
+        { memberId: "member_child", shareAmount: 150 },
+        { memberId: "member_member", shareAmount: 150 },
+      ],
+      date: Date.now() - 1000 * 60 * 60 * 6,
+      note: "Ailece sinema",
+    },
+  ],
+  settlements: [
+    {
+      id: "settlement_demo",
+      familyId: "family_demo",
+      fromMemberId: "member_child",
+      toMemberId: "member_parent",
+      amount: 100,
+      date: Date.now() - 1000 * 60 * 60 * 2,
+      status: "marked_paid",
+      note: "Harçlıktan ödeme",
+    },
+  ],
+  audit: [
+    {
+      id: "audit_family_created",
+      familyId: "family_demo",
+      type: "FAMILY_CREATED",
+      timestamp: Date.now() - 1000 * 60 * 60 * 24,
+      meta: { name: "Yıldız Ailesi" },
+    },
+    {
+      id: "audit_member_joined",
+      familyId: "family_demo",
+      type: "MEMBER_JOINED",
+      actorMemberId: "member_child",
+      timestamp: Date.now() - 1000 * 60 * 60 * 21,
+      meta: { displayName: "Efe Yıldız" },
+    },
+  ],
+  session: {
+    activeFamilyId: "family_demo",
+    activeMemberId: "member_parent",
+  },
+};
